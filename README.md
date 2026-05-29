@@ -11,7 +11,7 @@ The reproducibility package covers:
 - Cost-sensitive threshold optimization with `C_FN:C_FP = 5:1`.
 - Global SHAP rankings.
 - Bootstrap SHAP stability with `B in {30, 50, 80, 100}` and the primary paper setting `B = 50`.
-- Pareto and weighted-score analysis.
+- Three-objective NSGA-II-style Pareto screening and weighted-score analysis.
 
 ## Environment
 
@@ -24,6 +24,12 @@ python3 -m venv .venv
 ```
 
 The original runs used seed `42`. The scripts store seed and split metadata in their JSON outputs.
+
+The repository also includes a lightweight tracked snapshot under
+`reproducibility_artifacts/`. These files are the paper-level outputs used to
+audit the manuscript tables and figures without committing raw data or the full
+generated `outputs/` workspace. Large SHAP ranking caches and row-level data are
+regenerated locally rather than tracked.
 
 ## Data
 
@@ -116,7 +122,10 @@ Run these from the repo root:
 
 ## Expected Primary Outputs
 
-The values are expected to match these machine-readable outputs:
+Regenerated files are written to `outputs/`, which is ignored by git. The
+tracked reference copies are stored under `reproducibility_artifacts/`.
+
+The primary machine-readable outputs are:
 
 - `outputs/homecredit_4model_results.json`
 - `outputs/cost_sensitive_homecredit.json`
@@ -124,8 +133,28 @@ The values are expected to match these machine-readable outputs:
 - `outputs/tables/table4_pareto_homecredit.csv`
 - `outputs/pareto_summary.json`
 
+Tracked equivalents:
+
+- `reproducibility_artifacts/results/homecredit_4model_results.json`
+- `reproducibility_artifacts/results/cost_sensitive_homecredit.json`
+- `reproducibility_artifacts/results/pareto_summary.json`
+- `reproducibility_artifacts/tables/table3_stability_homecredit.csv`
+- `reproducibility_artifacts/tables/table4_pareto_homecredit.csv`
+- `reproducibility_artifacts/shap_bootstrap/stability_b_sweep.csv`
+- `reproducibility_artifacts/figures/*.pdf`
+
+Expected key checks from the paper-level run:
+
+- SHAP stability uses `B = 50`, giving `1225` pairwise comparisons per model.
+- Highest ROC-AUC: XGBoost, about `0.7573`.
+- Lowest expected cost at `t*`: LightGBM, about `0.3374`.
+- Best equal-weight `W`: LightGBM, about `0.5373`.
+- Three-objective Pareto front `F1`: RF, XGBoost, and LightGBM.
+- LR is assigned to `F2` because it is dominated in the three-objective space.
+
 ## Known Reproducibility Notes
 
 - The Home Credit dataset has no calendar timestamp in `application_train.csv`; the source uses `SK_ID_CURR` as a deterministic surrogate ordering for the 60/20/20 split.
 - Generated experiment artifacts are excluded from git via `outputs/`; regenerate them with `scripts/run_pipeline.sh` when auditing the manuscript values.
+- Paper-level evidence files are tracked in `reproducibility_artifacts/`.
 - Small numerical differences may occur across CPU, BLAS/OpenMP, XGBoost, and LightGBM runtime backends, but seed, split, and package versions are fixed.

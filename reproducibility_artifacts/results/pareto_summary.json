@@ -1,0 +1,70 @@
+{
+  "dataset": "Home Credit",
+  "n_models": 4,
+  "w_score_formula": "W = (1/3) * (norm_AUC - norm_EC + norm_Stability)",
+  "stability_metric": "Spearman rho mean (B=50, 1225 pairs)",
+  "models": {
+    "LR": {
+      "roc_auc": 0.749053,
+      "ec_optimal": 0.346796,
+      "threshold_star": 0.68,
+      "spearman_mean": 0.8288,
+      "norm_auc": 0.7073,
+      "norm_ec": 0.465,
+      "norm_stab": 0.0,
+      "W": 0.0808,
+      "W_rank": 3,
+      "pareto_optimal": false,
+      "nsga2_front": 2,
+      "crowding_distance": "inf"
+    },
+    "RF": {
+      "roc_auc": 0.729219,
+      "ec_optimal": 0.357609,
+      "threshold_star": 0.59,
+      "spearman_mean": 0.9794,
+      "norm_auc": 0.0,
+      "norm_ec": 1.0,
+      "norm_stab": 1.0,
+      "W": 0.0,
+      "W_rank": 4,
+      "pareto_optimal": true,
+      "nsga2_front": 1,
+      "crowding_distance": "inf"
+    },
+    "XGBoost": {
+      "roc_auc": 0.75726,
+      "ec_optimal": 0.339366,
+      "threshold_star": 0.68,
+      "spearman_mean": 0.8938,
+      "norm_auc": 1.0,
+      "norm_ec": 0.0973,
+      "norm_stab": 0.4316,
+      "W": 0.4448,
+      "W_rank": 2,
+      "pareto_optimal": true,
+      "nsga2_front": 1,
+      "crowding_distance": "inf"
+    },
+    "LightGBM": {
+      "roc_auc": 0.756897,
+      "ec_optimal": 0.337398,
+      "threshold_star": 0.68,
+      "spearman_mean": 0.9229,
+      "norm_auc": 0.987,
+      "norm_ec": 0.0,
+      "norm_stab": 0.6248,
+      "W": 0.5373,
+      "W_rank": 1,
+      "pareto_optimal": true,
+      "nsga2_front": 1,
+      "crowding_distance": "inf"
+    }
+  },
+  "pareto_optimal_models": [
+    "RF",
+    "XGBoost",
+    "LightGBM"
+  ],
+  "best_W_model": "LightGBM"
+}

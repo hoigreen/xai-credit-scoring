@@ -1,0 +1,5 @@
+Model,ROC-AUC,EC(t*),t*,S̄_SHAP (Spearman ρ),W,W rank,3-objective Pareto-optimal,NSGA-II Front,Crowding Distance
+LR,0.7491,0.3468,0.6800,0.8288,0.0808,3,False,2,inf
+RF,0.7292,0.3576,0.5900,0.9794,0.0000,4,True,1,inf
+XGBoost,0.7573,0.3394,0.6800,0.8938,0.4448,2,True,1,inf
+LightGBM,0.7569,0.3374,0.6800,0.9229,0.5373,1,True,1,inf

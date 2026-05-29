@@ -1,0 +1,5 @@
+model,dataset,B,n_pairs,jaccard5_mean,jaccard5_std,jaccard10_mean,jaccard10_std,spearman_mean,spearman_std
+LR,Home Credit,50,1225,0.548,0.2034,0.4889,0.134,0.8288,0.0269
+RF,Home Credit,50,1225,0.9143,0.1457,0.8518,0.0989,0.9794,0.0026
+XGBoost,Home Credit,50,1225,0.7826,0.1696,0.8805,0.1033,0.8938,0.0122
+LightGBM,Home Credit,50,1225,0.8025,0.1665,0.8511,0.0856,0.9229,0.0096
