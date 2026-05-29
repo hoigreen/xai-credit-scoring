@@ -31,6 +31,11 @@ Pareto screening:
 """
 
 from __future__ import annotations
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patheffects as path_effects
+import matplotlib.patches as mpatches
 
 import argparse
 import json
@@ -39,11 +44,6 @@ import sys
 
 import matplotlib
 matplotlib.use("Agg")
-import matplotlib.patches as mpatches
-import matplotlib.patheffects as path_effects
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
 
 # ── paths ─────────────────────────────────────────────────────────────────────
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -352,7 +352,8 @@ def plot_pareto(df: pd.DataFrame, out_pdf: pathlib.Path, out_png: pathlib.Path) 
 
     # ── Pareto frontier line (2D projection: EC vs Stability) ─────────────────
     # XGBoost is still on NSGA-II F1 in 3D due to its AUC advantage.
-    pareto_df = df[df["pareto_projection_ec_stability"]].sort_values("ec_optimal")
+    pareto_df = df[df["pareto_projection_ec_stability"]
+                   ].sort_values("ec_optimal")
     if len(pareto_df) >= 2:
         # staircase / step-function frontier
         px = pareto_df["ec_optimal"].values
